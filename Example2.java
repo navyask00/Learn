@@ -8,7 +8,7 @@
 	        s.a=s.a-b;
 	        System.out.println(s.a);
 	        System.out.println(b);
-		System.out.println("Program Ended");
+		System.out.println("Program Ended Successfully");
 	           
 	       
 	    }
