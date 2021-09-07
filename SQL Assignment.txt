@@ -1,0 +1,831 @@
+mysql> use bank;
+Database changed
+mysql> desc customersInfo;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| CustomerID       | int         | NO   | PRI | NULL    | auto_increment |
+| CustomerName     | varchar(20) | YES  |     | NULL    |                |
+| CustomerCity     | varchar(20) | YES  |     | NULL    |                |
+| CustomerAddress  | varchar(20) | YES  |     | NULL    |                |
+| CustomerMobileNo | bigint      | YES  | UNI | NULL    |                |
+| PAN              | varchar(20) | YES  | UNI | NULL    |                |
+| CustomerPassword | varchar(20) | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+7 rows in set (0.05 sec)
+
+mysql> select * from customersInfo;
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+| CustomerID | CustomerName | CustomerCity | CustomerAddress | CustomerMobileNo | PAN       | CustomerPassword |
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+|        123 | Navya        | Salem        | Attur           |       8870755901 | BLOPN7484 | navya            |
+|        124 | Kaveri       | Salem        | Ammapet         |       8870754901 | BLOIN7484 | nvya             |
+|        125 | Soundhu      | Salem        | Ammapet         |       8870354901 | BLOYN7484 | nvya123          |
+|        126 | Anvi         | Chennai      | Ambattur        |       9870754901 | BSOIN7484 | hjlih8           |
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> Insert into customersInfo values(Null,'Pranav','Chennai','Guindy',8768923145,'KLHO9099','pranavpn'),(Null,'Pragya','Chennai','Adayar',98768923145,'OLHO9099','pragyavpn');
+Query OK, 2 rows affected (0.17 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from customersInfo;
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+| CustomerID | CustomerName | CustomerCity | CustomerAddress | CustomerMobileNo | PAN       | CustomerPassword |
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+|        123 | Navya        | Salem        | Attur           |       8870755901 | BLOPN7484 | navya            |
+|        124 | Kaveri       | Salem        | Ammapet         |       8870754901 | BLOIN7484 | nvya             |
+|        125 | Soundhu      | Salem        | Ammapet         |       8870354901 | BLOYN7484 | nvya123          |
+|        126 | Anvi         | Chennai      | Ambattur        |       9870754901 | BSOIN7484 | hjlih8           |
+|        127 | Pranav       | Chennai      | Guindy          |       8768923145 | KLHO9099  | pranavpn         |
+|        128 | Pragya       | Chennai      | Adayar          |      98768923145 | OLHO9099  | pragyavpn        |
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+6 rows in set (0.00 sec)
+
+mysql>  update customersInfo set CustomerMobileNo =6789012345 where CustomerID=128;
+Query OK, 1 row affected (0.23 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  Insert into customersInfo values(Null,'poorvi','Erode','Erode Town',8368923145,'SLHO9099','poorvivpn'),(Null,'Bathri','Banglore','Yeswanthpur',9876892325,'HLHO9099','bathri123'),(Null,'Mega','Mysore','Madivala',9080923451,'KLFHO9099','megasuree'),(Null,'Meera','Chennai','Alwarpet',9879233145,'LKML9099','meeran');
+Query OK, 4 rows affected (0.14 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from customersInfo;
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+| CustomerID | CustomerName | CustomerCity | CustomerAddress | CustomerMobileNo | PAN       | CustomerPassword |
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+|        123 | Navya        | Salem        | Attur           |       8870755901 | BLOPN7484 | navya            |
+|        124 | Kaveri       | Salem        | Ammapet         |       8870754901 | BLOIN7484 | nvya             |
+|        125 | Soundhu      | Salem        | Ammapet         |       8870354901 | BLOYN7484 | nvya123          |
+|        126 | Anvi         | Chennai      | Ambattur        |       9870754901 | BSOIN7484 | hjlih8           |
+|        127 | Pranav       | Chennai      | Guindy          |       8768923145 | KLHO9099  | pranavpn         |
+|        128 | Pragya       | Chennai      | Adayar          |       6789012345 | OLHO9099  | pragyavpn        |
+|        133 | poorvi       | Erode        | Erode Town      |       8368923145 | SLHO9099  | poorvivpn        |
+|        134 | Bathri       | Banglore     | Yeswanthpur     |       9876892325 | HLHO9099  | bathri123        |
+|        135 | Mega         | Mysore       | Madivala        |       9080923451 | KLFHO9099 | megasuree        |
+|        136 | Meera        | Chennai      | Alwarpet        |       9879233145 | LKML9099  | meeran           |
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+10 rows in set (0.00 sec)
+
+mysql> desc AccountInfo;
++-----------------+-------------+------+-----+---------+----------------+
+| Field           | Type        | Null | Key | Default | Extra          |
++-----------------+-------------+------+-----+---------+----------------+
+| AccountID       | int         | NO   | PRI | NULL    | auto_increment |
+| CustomerID      | int         | YES  | MUL | NULL    |                |
+| AccountType     | varchar(20) | YES  |     | NULL    |                |
+| AccountBalance  | bigint      | YES  |     | NULL    |                |
+| AccountOpenDate | date        | YES  |     | NULL    |                |
+| AccountStatus   | varchar(20) | YES  |     | NULL    |                |
++-----------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.08 sec)
+
+mysql> Insert into AccountInfo (321727,NULL,'Savings',123889993,'2021-07-05','Open');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '321727,NULL,'Savings',123889993,'2021-07-05','Open')' at line 1
+mysql> Insert into AccountInfo (321727,123,'Savings',123889993,'2021-07-05','Open');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '321727,123,'Savings',123889993,'2021-07-05','Open')' at line 1
+mysql> Insert into AccountInfo values (321727,123,'Savings',123889993,'2021-07-05','Open');
+Query OK, 1 row affected (0.23 sec)
+
+mysql> Insert into AccountInfo values (NULL,NULL,'Salary',123789993,'2021-09-01','Open');
+Query OK, 1 row affected (0.27 sec)
+
+mysql> Insert into AccountInfo values (NULL,NULL,'Recurring Deposit',126693,'1991-09-01','Closed');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> Insert into AccountInfo values (NULL,NULL,'Fixed Deposit',112233,'2001-02-01','Blocked');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> Insert into AccountInfo values (NULL,NULL,'NRI',89233,'2009-11-01','Blocked');
+Query OK, 1 row affected (0.10 sec)
+
+mysql>  Insert into AccountInfo values (NULL,NULL,'Salary',8222233,'2020-11-02','open');
+Query OK, 1 row affected (0.17 sec)
+
+mysql> select * from AccountInfo;
++-----------+------------+-------------------+----------------+-----------------+---------------+
+| AccountID | CustomerID | AccountType       | AccountBalance | AccountOpenDate | AccountStatus |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+|    321727 |        123 | Savings           |      123889993 | 2021-07-05      | Open          |
+|    321728 |       NULL | Salary            |      123789993 | 2021-09-01      | Open          |
+|    321729 |       NULL | Recurring Deposit |         126693 | 1991-09-01      | Closed        |
+|    321730 |       NULL | Fixed Deposit     |         112233 | 2001-02-01      | Blocked       |
+|    321731 |       NULL | NRI               |          89233 | 2009-11-01      | Blocked       |
+|    321732 |       NULL | Salary            |        8222233 | 2020-11-02      | open          |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+6 rows in set (0.04 sec)
+
+mysql> update AccountsInfo set customerID=124 where AccountID=321730;
+ERROR 1146 (42S02): Table 'bank.accountsinfo' doesn't exist
+mysql> update AccountInfo set customerID=124 where AccountID=321730;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update AccountsInfo set customerID=125 where AccountID=321731;
+ERROR 1146 (42S02): Table 'bank.accountsinfo' doesn't exist
+mysql> update AccountInfo set customerID=125 where AccountID=321728;
+Query OK, 1 row affected (0.18 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update AccountInfo set customerID=126 where AccountID=321731;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update AccountInfo set customerID=128 where AccountID=321732;
+Query OK, 1 row affected (0.14 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update AccountInfo set customerID=128 where AccountID=321729;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from AccountInfo;
++-----------+------------+-------------------+----------------+-----------------+---------------+
+| AccountID | CustomerID | AccountType       | AccountBalance | AccountOpenDate | AccountStatus |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+|    321727 |        123 | Savings           |      123889993 | 2021-07-05      | Open          |
+|    321728 |        125 | Salary            |      123789993 | 2021-09-01      | Open          |
+|    321729 |        128 | Recurring Deposit |         126693 | 1991-09-01      | Closed        |
+|    321730 |        124 | Fixed Deposit     |         112233 | 2001-02-01      | Blocked       |
+|    321731 |        126 | NRI               |          89233 | 2009-11-01      | Blocked       |
+|    321732 |        128 | Salary            |        8222233 | 2020-11-02      | open          |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+6 rows in set (0.04 sec)
+
+mysql> update AccountInfo set customerID=127 where AccountID=321732;
+Query OK, 1 row affected (0.19 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  Insert into AccountInfo values (NULL,133,'NRI',8934233,'2000-11-01','Blocked');
+Query OK, 1 row affected (0.11 sec)
+
+mysql>  Insert into AccountInfo values (NULL,134,'NRI',23333,'1999-11-01','open');
+Query OK, 1 row affected (0.20 sec)
+
+mysql>  Insert into AccountInfo values (NULL,135,'NRI',1765163,'2017-01-01','Closed');
+Query OK, 1 row affected (0.10 sec)
+
+mysql>  Insert into AccountInfo values (NULL,136,'Salary',8632673,'2019-11-01','Open');
+Query OK, 1 row affected (0.12 sec)
+
+mysql>  Insert into AccountInfo values (NULL,137,'NRI',89233,'2009-11-01','Blocked');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`bank`.`accountinfo`, CONSTRAINT `accountinfo_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customersinfo` (`CustomerID`) ON DELETE CASCADE ON UPDATE CASCADE)
+mysql> select* from AccountInfo;
++-----------+------------+-------------------+----------------+-----------------+---------------+
+| AccountID | CustomerID | AccountType       | AccountBalance | AccountOpenDate | AccountStatus |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+|    321727 |        123 | Savings           |      123889993 | 2021-07-05      | Open          |
+|    321728 |        125 | Salary            |      123789993 | 2021-09-01      | Open          |
+|    321729 |        128 | Recurring Deposit |         126693 | 1991-09-01      | Closed        |
+|    321730 |        124 | Fixed Deposit     |         112233 | 2001-02-01      | Blocked       |
+|    321731 |        126 | NRI               |          89233 | 2009-11-01      | Blocked       |
+|    321732 |        127 | Salary            |        8222233 | 2020-11-02      | open          |
+|    321733 |        133 | NRI               |        8934233 | 2000-11-01      | Blocked       |
+|    321734 |        134 | NRI               |          23333 | 1999-11-01      | open          |
+|    321735 |        135 | NRI               |        1765163 | 2017-01-01      | Closed        |
+|    321736 |        136 | Salary            |        8632673 | 2019-11-01      | Open          |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+10 rows in set (0.04 sec)
+
+mysql> desc TransactionInfo;
++-----------------+-------------+------+-----+---------+----------------+
+| Field           | Type        | Null | Key | Default | Extra          |
++-----------------+-------------+------+-----+---------+----------------+
+| TransactionID   | int         | NO   | PRI | NULL    | auto_increment |
+| AccountID       | int         | YES  | MUL | NULL    |                |
+| TransactionType | varchar(20) | YES  |     | NULL    |                |
+| Amount          | double      | YES  |     | NULL    |                |
+| TransactionDate | date        | YES  |     | NULL    |                |
++-----------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.08 sec)
+
+mysql>  Insert into TransactionInfo values (12343344,321727,'Debit',8222,'2021-11-01');
+Query OK, 1 row affected (0.17 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321728,'Credit',3672,'2021-11-21');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321729,'Debit',2122,'2000-11-01');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321736,'Credit',11222,'2020-11-01');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321735,'Debit',1222,'2018-11-01');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321737,'Credit',8122,'2021-11-01');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`bank`.`transactioninfo`, CONSTRAINT `transactioninfo_ibfk_1` FOREIGN KEY (`AccountID`) REFERENCES `accountinfo` (`AccountID`) ON DELETE CASCADE ON UPDATE CASCADE)
+mysql> Insert into TransactionInfo values (NULL,321733,'Credit',8122,'2021-11-01');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> select * from TransactionInfo;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343345 |    321728 | Credit          |   3672 | 2021-11-21      |
+|      12343346 |    321729 | Debit           |   2122 | 2000-11-01      |
+|      12343347 |    321736 | Credit          |  11222 | 2020-11-01      |
+|      12343348 |    321735 | Debit           |   1222 | 2018-11-01      |
+|      12343350 |    321733 | Credit          |   8122 | 2021-11-01      |
++---------------+-----------+-----------------+--------+-----------------+
+6 rows in set (0.04 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321737,'Debit',8122,'2021-11-01');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`bank`.`transactioninfo`, CONSTRAINT `transactioninfo_ibfk_1` FOREIGN KEY (`AccountID`) REFERENCES `accountinfo` (`AccountID`) ON DELETE CASCADE ON UPDATE CASCADE)
+mysql> Insert into TransactionInfo values (NULL,321727,'Credit',8122,'2021-11-01');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321734,'Credit',812222,'1999-11-01');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321734,'Credit',8122,'2021-11-01');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321729,'Credit',29822,'1991-11-11');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321730,'Credit',8122,'2003-04-13');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> select * from TransactionInfo;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343345 |    321728 | Credit          |   3672 | 2021-11-21      |
+|      12343346 |    321729 | Debit           |   2122 | 2000-11-01      |
+|      12343347 |    321736 | Credit          |  11222 | 2020-11-01      |
+|      12343348 |    321735 | Debit           |   1222 | 2018-11-01      |
+|      12343350 |    321733 | Credit          |   8122 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343353 |    321734 | Credit          | 812222 | 1999-11-01      |
+|      12343354 |    321734 | Credit          |   8122 | 2021-11-01      |
+|      12343355 |    321729 | Credit          |  29822 | 1991-11-11      |
+|      12343356 |    321730 | Credit          |   8122 | 2003-04-13      |
++---------------+-----------+-----------------+--------+-----------------+
+11 rows in set (0.01 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321733,'Debit',2122,'2011-11-01');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321731,'Credit',122,'2017-02-11');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from TransactionInfo;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343345 |    321728 | Credit          |   3672 | 2021-11-21      |
+|      12343346 |    321729 | Debit           |   2122 | 2000-11-01      |
+|      12343347 |    321736 | Credit          |  11222 | 2020-11-01      |
+|      12343348 |    321735 | Debit           |   1222 | 2018-11-01      |
+|      12343350 |    321733 | Credit          |   8122 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343353 |    321734 | Credit          | 812222 | 1999-11-01      |
+|      12343354 |    321734 | Credit          |   8122 | 2021-11-01      |
+|      12343355 |    321729 | Credit          |  29822 | 1991-11-11      |
+|      12343356 |    321730 | Credit          |   8122 | 2003-04-13      |
+|      12343357 |    321733 | Debit           |   2122 | 2011-11-01      |
+|      12343358 |    321731 | Credit          |    122 | 2017-02-11      |
++---------------+-----------+-----------------+--------+-----------------+
+13 rows in set (0.04 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321737,'Credit',812,'2021-11-14');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`bank`.`transactioninfo`, CONSTRAINT `transactioninfo_ibfk_1` FOREIGN KEY (`AccountID`) REFERENCES `accountinfo` (`AccountID`) ON DELETE CASCADE ON UPDATE CASCADE)
+mysql>  Insert into TransactionInfo values (NULL,321727,'Credit',812,'2021-11-14');
+Query OK, 1 row affected (0.22 sec)
+
+mysql>  Insert into TransactionInfo values (NULL,321736,'Credit',22812,'2021-01-14');
+Query OK, 1 row affected (0.08 sec)
+
+mysql>  Insert into TransactionInfo values (NULL,321727,'Credit',812,'2021-11-19');
+Query OK, 1 row affected (0.11 sec)
+
+mysql>  Insert into TransactionInfo values (NULL,321727,'Credit',812,'2021-11-25');
+Query OK, 1 row affected (0.17 sec)
+
+mysql>  Insert into TransactionInfo values (NULL,321727,'Credit',812,'2021-11-30');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from TransactionInfo;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343345 |    321728 | Credit          |   3672 | 2021-11-21      |
+|      12343346 |    321729 | Debit           |   2122 | 2000-11-01      |
+|      12343347 |    321736 | Credit          |  11222 | 2020-11-01      |
+|      12343348 |    321735 | Debit           |   1222 | 2018-11-01      |
+|      12343350 |    321733 | Credit          |   8122 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343353 |    321734 | Credit          | 812222 | 1999-11-01      |
+|      12343354 |    321734 | Credit          |   8122 | 2021-11-01      |
+|      12343355 |    321729 | Credit          |  29822 | 1991-11-11      |
+|      12343356 |    321730 | Credit          |   8122 | 2003-04-13      |
+|      12343357 |    321733 | Debit           |   2122 | 2011-11-01      |
+|      12343358 |    321731 | Credit          |    122 | 2017-02-11      |
+|      12343360 |    321727 | Credit          |    812 | 2021-11-14      |
+|      12343361 |    321736 | Credit          |  22812 | 2021-01-14      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
++---------------+-----------+-----------------+--------+-----------------+
+18 rows in set (0.00 sec)
+
+mysql>  Insert into TransactionInfo values (NULL,321727,'Credit',12812,'2021-08-14');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from TranscationInfo;
+ERROR 1146 (42S02): Table 'bank.transcationinfo' doesn't exist
+mysql>  Insert into TransactionInfo values (NULL,321727,'Debit',22812,'2021-11-15');
+Query OK, 1 row affected (0.12 sec)
+
+mysql>  Insert into TransactionInfo values (NULL,321734,'Debit',33812,'2000-11-14');
+Query OK, 1 row affected (0.20 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321734,'Credit',33812,'2001-01-14');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321734,'Debit',3311,'2009-01-14');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321734,'Credit',3309,'2017-12-14');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321729,'Debit',312,'2000-10-14');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> Insert into TransactionInfo values (NULL,321731,'Debit',3812,'2010-11-14');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> select * from TransactionInfo;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343345 |    321728 | Credit          |   3672 | 2021-11-21      |
+|      12343346 |    321729 | Debit           |   2122 | 2000-11-01      |
+|      12343347 |    321736 | Credit          |  11222 | 2020-11-01      |
+|      12343348 |    321735 | Debit           |   1222 | 2018-11-01      |
+|      12343350 |    321733 | Credit          |   8122 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343353 |    321734 | Credit          | 812222 | 1999-11-01      |
+|      12343354 |    321734 | Credit          |   8122 | 2021-11-01      |
+|      12343355 |    321729 | Credit          |  29822 | 1991-11-11      |
+|      12343356 |    321730 | Credit          |   8122 | 2003-04-13      |
+|      12343357 |    321733 | Debit           |   2122 | 2011-11-01      |
+|      12343358 |    321731 | Credit          |    122 | 2017-02-11      |
+|      12343360 |    321727 | Credit          |    812 | 2021-11-14      |
+|      12343361 |    321736 | Credit          |  22812 | 2021-01-14      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
+|      12343365 |    321727 | Credit          |  12812 | 2021-08-14      |
+|      12343366 |    321727 | Debit           |  22812 | 2021-11-15      |
+|      12343367 |    321734 | Debit           |  33812 | 2000-11-14      |
+|      12343368 |    321734 | Credit          |  33812 | 2001-01-14      |
+|      12343369 |    321734 | Debit           |   3311 | 2009-01-14      |
+|      12343370 |    321734 | Credit          |   3309 | 2017-12-14      |
+|      12343371 |    321729 | Debit           |    312 | 2000-10-14      |
+|      12343372 |    321731 | Debit           |   3812 | 2010-11-14      |
++---------------+-----------+-----------------+--------+-----------------+
+26 rows in set (0.00 sec)
+
+mysql> Insert into AccountInfo values Insert into AccountInfo values (NULL,136,'Savings',82673,'2021-11-01','Open');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Insert into AccountInfo values (NULL,136,'Savings',82673,'2021-11-01','Open')' at line 1
+mysql> Insert into AccountInfo values (NULL,136,'Savings',82673,'2021-11-01','Open');
+Query OK, 1 row affected (0.22 sec)
+
+mysql> Insert into AccountInfo values (NULL,137,'Salary',8267333,'2021-11-01','Open');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`bank`.`accountinfo`, CONSTRAINT `accountinfo_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customersinfo` (`CustomerID`) ON DELETE CASCADE ON UPDATE CASCADE)
+mysql> Insert into AccountInfo values (NULL,135,'Salary',8273,'2020-11-01','Open');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select* from AccountInfo;
++-----------+------------+-------------------+----------------+-----------------+---------------+
+| AccountID | CustomerID | AccountType       | AccountBalance | AccountOpenDate | AccountStatus |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+|    321727 |        123 | Savings           |      123889993 | 2021-07-05      | Open          |
+|    321728 |        125 | Salary            |      123789993 | 2021-09-01      | Open          |
+|    321729 |        128 | Recurring Deposit |         126693 | 1991-09-01      | Closed        |
+|    321730 |        124 | Fixed Deposit     |         112233 | 2001-02-01      | Blocked       |
+|    321731 |        126 | NRI               |          89233 | 2009-11-01      | Blocked       |
+|    321732 |        127 | Salary            |        8222233 | 2020-11-02      | open          |
+|    321733 |        133 | NRI               |        8934233 | 2000-11-01      | Blocked       |
+|    321734 |        134 | NRI               |          23333 | 1999-11-01      | open          |
+|    321735 |        135 | NRI               |        1765163 | 2017-01-01      | Closed        |
+|    321736 |        136 | Salary            |        8632673 | 2019-11-01      | Open          |
+|    321738 |        136 | Savings           |          82673 | 2021-11-01      | Open          |
+|    321740 |        135 | Salary            |           8273 | 2020-11-01      | Open          |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+12 rows in set (0.00 sec)
+
+mysql> Insert into AccountInfo values (NULL,128,'Recurring Deposit',82673,'2021-11-01','Open');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> Insert into AccountInfo values (NULL,136,'Fixed Deposit',82673,'2021-11-01','Open');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> Insert into AccountInfo values (NULL,133,'Savings',82273,'2020-11-01','Open');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from customersInfo;
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+| CustomerID | CustomerName | CustomerCity | CustomerAddress | CustomerMobileNo | PAN       | CustomerPassword |
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+|        123 | Navya        | Salem        | Attur           |       8870755901 | BLOPN7484 | navya            |
+|        124 | Kaveri       | Salem        | Ammapet         |       8870754901 | BLOIN7484 | nvya             |
+|        125 | Soundhu      | Salem        | Ammapet         |       8870354901 | BLOYN7484 | nvya123          |
+|        126 | Anvi         | Chennai      | Ambattur        |       9870754901 | BSOIN7484 | hjlih8           |
+|        127 | Pranav       | Chennai      | Guindy          |       8768923145 | KLHO9099  | pranavpn         |
+|        128 | Pragya       | Chennai      | Adayar          |       6789012345 | OLHO9099  | pragyavpn        |
+|        133 | poorvi       | Erode        | Erode Town      |       8368923145 | SLHO9099  | poorvivpn        |
+|        134 | Bathri       | Banglore     | Yeswanthpur     |       9876892325 | HLHO9099  | bathri123        |
+|        135 | Mega         | Mysore       | Madivala        |       9080923451 | KLFHO9099 | megasuree        |
+|        136 | Meera        | Chennai      | Alwarpet        |       9879233145 | LKML9099  | meeran           |
++------------+--------------+--------------+-----------------+------------------+-----------+------------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from AccountInfo;
++-----------+------------+-------------------+----------------+-----------------+---------------+
+| AccountID | CustomerID | AccountType       | AccountBalance | AccountOpenDate | AccountStatus |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+|    321727 |        123 | Savings           |      123889993 | 2021-07-05      | Open          |
+|    321728 |        125 | Salary            |      123789993 | 2021-09-01      | Open          |
+|    321729 |        128 | Recurring Deposit |         126693 | 1991-09-01      | Closed        |
+|    321730 |        124 | Fixed Deposit     |         112233 | 2001-02-01      | Blocked       |
+|    321731 |        126 | NRI               |          89233 | 2009-11-01      | Blocked       |
+|    321732 |        127 | Salary            |        8222233 | 2020-11-02      | open          |
+|    321733 |        133 | NRI               |        8934233 | 2000-11-01      | Blocked       |
+|    321734 |        134 | NRI               |          23333 | 1999-11-01      | open          |
+|    321735 |        135 | NRI               |        1765163 | 2017-01-01      | Closed        |
+|    321736 |        136 | Salary            |        8632673 | 2019-11-01      | Open          |
+|    321738 |        136 | Savings           |          82673 | 2021-11-01      | Open          |
+|    321740 |        135 | Salary            |           8273 | 2020-11-01      | Open          |
+|    321741 |        128 | Recurring Deposit |          82673 | 2021-11-01      | Open          |
+|    321742 |        136 | Fixed Deposit     |          82673 | 2021-11-01      | Open          |
+|    321743 |        133 | Savings           |          82273 | 2020-11-01      | Open          |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+15 rows in set (0.00 sec)
+
+mysql> select * from TransactionInfo;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343345 |    321728 | Credit          |   3672 | 2021-11-21      |
+|      12343346 |    321729 | Debit           |   2122 | 2000-11-01      |
+|      12343347 |    321736 | Credit          |  11222 | 2020-11-01      |
+|      12343348 |    321735 | Debit           |   1222 | 2018-11-01      |
+|      12343350 |    321733 | Credit          |   8122 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343353 |    321734 | Credit          | 812222 | 1999-11-01      |
+|      12343354 |    321734 | Credit          |   8122 | 2021-11-01      |
+|      12343355 |    321729 | Credit          |  29822 | 1991-11-11      |
+|      12343356 |    321730 | Credit          |   8122 | 2003-04-13      |
+|      12343357 |    321733 | Debit           |   2122 | 2011-11-01      |
+|      12343358 |    321731 | Credit          |    122 | 2017-02-11      |
+|      12343360 |    321727 | Credit          |    812 | 2021-11-14      |
+|      12343361 |    321736 | Credit          |  22812 | 2021-01-14      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
+|      12343365 |    321727 | Credit          |  12812 | 2021-08-14      |
+|      12343366 |    321727 | Debit           |  22812 | 2021-11-15      |
+|      12343367 |    321734 | Debit           |  33812 | 2000-11-14      |
+|      12343368 |    321734 | Credit          |  33812 | 2001-01-14      |
+|      12343369 |    321734 | Debit           |   3311 | 2009-01-14      |
+|      12343370 |    321734 | Credit          |   3309 | 2017-12-14      |
+|      12343371 |    321729 | Debit           |    312 | 2000-10-14      |
+|      12343372 |    321731 | Debit           |   3812 | 2010-11-14      |
++---------------+-----------+-----------------+--------+-----------------+
+26 rows in set (0.04 sec)
+
+mysql> select Transactioninfo where AccountID=321727;
+ERROR 1054 (42S22): Unknown column 'Transactioninfo' in 'field list'
+mysql>  select TransactioInfo where AccountID=321727;
+ERROR 1054 (42S22): Unknown column 'TransactioInfo' in 'field list'
+mysql>  select* TransactionInfo where AccountID=321727;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TransactionInfo where AccountID=321727' at line 1
+mysql>  select*from TransactionInfo where AccountID=321727;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343360 |    321727 | Credit          |    812 | 2021-11-14      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
+|      12343365 |    321727 | Credit          |  12812 | 2021-08-14      |
+|      12343366 |    321727 | Debit           |  22812 | 2021-11-15      |
++---------------+-----------+-----------------+--------+-----------------+
+8 rows in set (0.05 sec)
+
+mysql> select*from TransactionInfo where AccountID=321727 ,GREATEST(TransactionID<5);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',GREATEST(TransactionID<5)' at line 1
+mysql> select * from TransactionInfo order by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> (SELECT * FROM Transactioninfo ORDER BY TransactionDate DESC LIMIT 5);
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343345 |    321728 | Credit          |   3672 | 2021-11-21      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343366 |    321727 | Debit           |  22812 | 2021-11-15      |
++---------------+-----------+-----------------+--------+-----------------+
+
+
+mysql> select * from TransactionInfo where TransactionDate between '2021-1-14' and  '2021-11-30'  and AccountID=321727;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343360 |    321727 | Credit          |    812 | 2021-11-14      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
+|      12343365 |    321727 | Credit          |  12812 | 2021-08-14      |
+|      12343366 |    321727 | Debit           |  22812 | 2021-11-15      |
++---------------+-----------+-----------------+--------+-----------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from TransactionInfo where TransactionDate between '2021-11-01' and  '2021-11-30'  and AccountID=321727;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343360 |    321727 | Credit          |    812 | 2021-11-14      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
+|      12343366 |    321727 | Debit           |  22812 | 2021-11-15      |
++---------------+-----------+-----------------+--------+-----------------+
+7 rows in set (0.00 sec)
+
+mysql> use bank;
+Database changed
+mysql> select * from TransactionInfo;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343345 |    321728 | Credit          |   3672 | 2021-11-21      |
+|      12343346 |    321729 | Debit           |   2122 | 2000-11-01      |
+|      12343347 |    321736 | Credit          |  11222 | 2020-11-01      |
+|      12343348 |    321735 | Debit           |   1222 | 2018-11-01      |
+|      12343350 |    321733 | Credit          |   8122 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343353 |    321734 | Credit          | 812222 | 1999-11-01      |
+|      12343354 |    321734 | Credit          |   8122 | 2021-11-01      |
+|      12343355 |    321729 | Credit          |  29822 | 1991-11-11      |
+|      12343356 |    321730 | Credit          |   8122 | 2003-04-13      |
+|      12343357 |    321733 | Debit           |   2122 | 2011-11-01      |
+|      12343358 |    321731 | Credit          |    122 | 2017-02-11      |
+|      12343360 |    321727 | Credit          |    812 | 2021-11-14      |
+|      12343361 |    321736 | Credit          |  22812 | 2021-01-14      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
+|      12343365 |    321727 | Credit          |  12812 | 2021-08-14      |
+|      12343366 |    321727 | Debit           |  22812 | 2021-11-15      |
+|      12343367 |    321734 | Debit           |  33812 | 2000-11-14      |
+|      12343368 |    321734 | Credit          |  33812 | 2001-01-14      |
+|      12343369 |    321734 | Debit           |   3311 | 2009-01-14      |
+|      12343370 |    321734 | Credit          |   3309 | 2017-12-14      |
+|      12343371 |    321729 | Debit           |    312 | 2000-10-14      |
+|      12343372 |    321731 | Debit           |   3812 | 2010-11-14      |
++---------------+-----------+-----------------+--------+-----------------+
+26 rows in set (0.05 sec)
+
+mysql> select * from TransactionInfo where AccountID=321727 orderby TransactionDate desc limit 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'orderby TransactionDate desc limit 5' at line 1
+mysql> select * from TransactionInfo where AccountID=321727 order by TransactionDate desc limit 5;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343366 |    321727 | Debit           |  22812 | 2021-11-15      |
+|      12343360 |    321727 | Credit          |    812 | 2021-11-14      |
++---------------+-----------+-----------------+--------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from TransactionInfo where AccountID=321727,TransactionDate '2021-11-30' between '2021-11-30^C
+mysql> select * from TransactionInfo where AccountID=321727,TransactionDate '2021-11-30' between '2021-11-14'
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',TransactionDate '2021-11-30' between '2021-11-14'' at line 1
+mysql> select * from TransactionInfo where AccountID=321727,TransactionDate '2021-11-30' between '2021-11-14';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',TransactionDate '2021-11-30' between '2021-11-14'' at line 1
+mysql> select * from TransactionInfo where AccountID=321727,TransactionDate '2021-11-30' between TransactionDate '2021-11-14';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',TransactionDate '2021-11-30' between TransactionDate '2021-11-14'' at line 1
+mysql> select * from TransactionInfo where AccountID=321727,TransactionDate '2021-11-30' between TransactionDate '2021-11-14';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',TransactionDate '2021-11-30' between TransactionDate '2021-11-14'' at line 1
+mysql>  select * from TransactionInfo where AccountID=321727,TransactionDate '2021-11-30' between and '2021-1-14';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',TransactionDate '2021-11-30' between and '2021-1-14'' at line 1
+mysql>  select * from TransactionInfo where AccountID=321727,TransactionDate between '2021-11-30' and '2021-1-14';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',TransactionDate between '2021-11-30' and '2021-1-14'' at line 1
+mysql>  select * from TransactionInfo where TransactionDate between '2021-11-30'  and '2021-1-14' and AccountID=321727;
+Empty set (0.05 sec)
+
+mysql> select * from TransactionInfo where TransactionDate between '2021-1-14' and  '2021-11-30'  and AccountID=321727;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343360 |    321727 | Credit          |    812 | 2021-11-14      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
+|      12343365 |    321727 | Credit          |  12812 | 2021-08-14      |
+|      12343366 |    321727 | Debit           |  22812 | 2021-11-15      |
++---------------+-----------+-----------------+--------+-----------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from TransactionInfo where TransactionDate between '2021-11-01' and  '2021-11-30'  and AccountID=321727;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343360 |    321727 | Credit          |    812 | 2021-11-14      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
+|      12343366 |    321727 | Debit           |  22812 | 2021-11-15      |
++---------------+-----------+-----------------+--------+-----------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from AccountInfo;
++-----------+------------+-------------------+----------------+-----------------+---------------+
+| AccountID | CustomerID | AccountType       | AccountBalance | AccountOpenDate | AccountStatus |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+|    321727 |        123 | Savings           |      123889993 | 2021-07-05      | Open          |
+|    321728 |        125 | Salary            |      123789993 | 2021-09-01      | Open          |
+|    321729 |        128 | Recurring Deposit |         126693 | 1991-09-01      | Closed        |
+|    321730 |        124 | Fixed Deposit     |         112233 | 2001-02-01      | Blocked       |
+|    321731 |        126 | NRI               |          89233 | 2009-11-01      | Blocked       |
+|    321732 |        127 | Salary            |        8222233 | 2020-11-02      | open          |
+|    321733 |        133 | NRI               |        8934233 | 2000-11-01      | Blocked       |
+|    321734 |        134 | NRI               |          23333 | 1999-11-01      | open          |
+|    321735 |        135 | NRI               |        1765163 | 2017-01-01      | Closed        |
+|    321736 |        136 | Salary            |        8632673 | 2019-11-01      | Open          |
+|    321738 |        136 | Savings           |          82673 | 2021-11-01      | Open          |
+|    321740 |        135 | Salary            |           8273 | 2020-11-01      | Open          |
+|    321741 |        128 | Recurring Deposit |          82673 | 2021-11-01      | Open          |
+|    321742 |        136 | Fixed Deposit     |          82673 | 2021-11-01      | Open          |
+|    321743 |        133 | Savings           |          82273 | 2020-11-01      | Open          |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+15 rows in set (0.00 sec)
+
+mysql> select distinct Accounttype from AccountInfo;
++-------------------+
+| Accounttype       |
++-------------------+
+| Savings           |
+| Salary            |
+| Recurring Deposit |
+| Fixed Deposit     |
+| NRI               |
++-------------------+
+5 rows in set (0.08 sec)
+
+mysql> select distinct Accounttype from AccountInfo where  CustomerID=128;
++-------------------+
+| Accounttype       |
++-------------------+
+| Recurring Deposit |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct Accounttype from AccountInfo where  CustomerID=127;
++-------------+
+| Accounttype |
++-------------+
+| Salary      |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from AccountInfo;
++-----------+------------+-------------------+----------------+-----------------+---------------+
+| AccountID | CustomerID | AccountType       | AccountBalance | AccountOpenDate | AccountStatus |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+|    321727 |        123 | Savings           |      123889993 | 2021-07-05      | Open          |
+|    321728 |        125 | Salary            |      123789993 | 2021-09-01      | Open          |
+|    321729 |        128 | Recurring Deposit |         126693 | 1991-09-01      | Closed        |
+|    321730 |        124 | Fixed Deposit     |         112233 | 2001-02-01      | Blocked       |
+|    321731 |        126 | NRI               |          89233 | 2009-11-01      | Blocked       |
+|    321732 |        127 | Salary            |        8222233 | 2020-11-02      | open          |
+|    321733 |        133 | NRI               |        8934233 | 2000-11-01      | Blocked       |
+|    321734 |        134 | NRI               |          23333 | 1999-11-01      | open          |
+|    321735 |        135 | NRI               |        1765163 | 2017-01-01      | Closed        |
+|    321736 |        136 | Salary            |        8632673 | 2019-11-01      | Open          |
+|    321738 |        136 | Savings           |          82673 | 2021-11-01      | Open          |
+|    321740 |        135 | Salary            |           8273 | 2020-11-01      | Open          |
+|    321741 |        128 | Recurring Deposit |          82673 | 2021-11-01      | Open          |
+|    321742 |        136 | Fixed Deposit     |          82673 | 2021-11-01      | Open          |
+|    321743 |        133 | Savings           |          82273 | 2020-11-01      | Open          |
++-----------+------------+-------------------+----------------+-----------------+---------------+
+15 rows in set (0.00 sec)
+
+mysql> select distinct AccountType from AccountInfo where CustomerID=135;
++-------------+
+| AccountType |
++-------------+
+| NRI         |
+| Salary      |
++-------------+
+2 rows in set (0.00 sec)
+
+mysql> select distinct CustomerID,CustomerName,CustomerAddress,CustomerMobileNo;
+ERROR 1054 (42S22): Unknown column 'CustomerID' in 'field list'
+mysql> select distinct CustomerID,CustomerName,CustomerAddress,CustomerMobileNo from CustomerInfo;
+ERROR 1146 (42S02): Table 'bank.customerinfo' doesn't exist
+mysql> select distinct CustomerID,CustomerName,CustomerAddress,CustomerMobileNo from customersInfo;
++------------+--------------+-----------------+------------------+
+| CustomerID | CustomerName | CustomerAddress | CustomerMobileNo |
++------------+--------------+-----------------+------------------+
+|        123 | Navya        | Attur           |       8870755901 |
+|        124 | Kaveri       | Ammapet         |       8870754901 |
+|        125 | Soundhu      | Ammapet         |       8870354901 |
+|        126 | Anvi         | Ambattur        |       9870754901 |
+|        127 | Pranav       | Guindy          |       8768923145 |
+|        128 | Pragya       | Adayar          |       6789012345 |
+|        133 | poorvi       | Erode Town      |       8368923145 |
+|        134 | Bathri       | Yeswanthpur     |       9876892325 |
+|        135 | Mega         | Madivala        |       9080923451 |
+|        136 | Meera        | Alwarpet        |       9879233145 |
++------------+--------------+-----------------+------------------+
+10 rows in set (0.04 sec)
+
+mysql> select distinct AccountID , AccountBalance , TransID , Amount from AccountInfo;
+ERROR 1054 (42S22): Unknown column 'TransID' in 'field list'
+mysql>  select distinct AccountID , AccountBalance , TransactionID , Amount from AccountInfo;
+ERROR 1054 (42S22): Unknown column 'TransactionID' in 'field list'
+mysql> select * from TransactionInfo;
++---------------+-----------+-----------------+--------+-----------------+
+| TransactionID | AccountID | TransactionType | Amount | TransactionDate |
++---------------+-----------+-----------------+--------+-----------------+
+|      12343344 |    321727 | Debit           |   8222 | 2021-11-01      |
+|      12343345 |    321728 | Credit          |   3672 | 2021-11-21      |
+|      12343346 |    321729 | Debit           |   2122 | 2000-11-01      |
+|      12343347 |    321736 | Credit          |  11222 | 2020-11-01      |
+|      12343348 |    321735 | Debit           |   1222 | 2018-11-01      |
+|      12343350 |    321733 | Credit          |   8122 | 2021-11-01      |
+|      12343352 |    321727 | Credit          |   8122 | 2021-11-01      |
+|      12343353 |    321734 | Credit          | 812222 | 1999-11-01      |
+|      12343354 |    321734 | Credit          |   8122 | 2021-11-01      |
+|      12343355 |    321729 | Credit          |  29822 | 1991-11-11      |
+|      12343356 |    321730 | Credit          |   8122 | 2003-04-13      |
+|      12343357 |    321733 | Debit           |   2122 | 2011-11-01      |
+|      12343358 |    321731 | Credit          |    122 | 2017-02-11      |
+|      12343360 |    321727 | Credit          |    812 | 2021-11-14      |
+|      12343361 |    321736 | Credit          |  22812 | 2021-01-14      |
+|      12343362 |    321727 | Credit          |    812 | 2021-11-19      |
+|      12343363 |    321727 | Credit          |    812 | 2021-11-25      |
+|      12343364 |    321727 | Credit          |    812 | 2021-11-30      |
+|      12343365 |    321727 | Credit          |  12812 | 2021-08-14      |
+|      12343366 |    321727 | Debit           |  22812 | 2021-11-15      |
+|      12343367 |    321734 | Debit           |  33812 | 2000-11-14      |
+|      12343368 |    321734 | Credit          |  33812 | 2001-01-14      |
+|      12343369 |    321734 | Debit           |   3311 | 2009-01-14      |
+|      12343370 |    321734 | Credit          |   3309 | 2017-12-14      |
+|      12343371 |    321729 | Debit           |    312 | 2000-10-14      |
+|      12343372 |    321731 | Debit           |   3812 | 2010-11-14      |
++---------------+-----------+-----------------+--------+-----------------+
+26 rows in set (0.00 sec)
+
+mysql>  select distinct AccountID , AccountBalance , Amount from AccountInfo;
+ERROR 1054 (42S22): Unknown column 'Amount' in 'field list'
+mysql> select distinct AccountID , AccountBalance from AccountInfo;
++-----------+----------------+
+| AccountID | AccountBalance |
++-----------+----------------+
+|    321727 |      123889993 |
+|    321728 |      123789993 |
+|    321729 |         126693 |
+|    321730 |         112233 |
+|    321731 |          89233 |
+|    321732 |        8222233 |
+|    321733 |        8934233 |
+|    321734 |          23333 |
+|    321735 |        1765163 |
+|    321736 |        8632673 |
+|    321738 |          82673 |
+|    321740 |           8273 |
+|    321741 |          82673 |
+|    321742 |          82673 |
+|    321743 |          82273 |
++-----------+----------------+
+15 rows in set (0.00 sec)
+
+mysql>
